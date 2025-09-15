@@ -5,7 +5,7 @@ const ResumeHeader = () => {
   const handleDownload = () => {
     // Create an anchor element and trigger the download
     const link = document.createElement('a');
-    link.href = '/AdityaChitmitwarResume.pdf';
+    link.href = 'src/assets/AdityaChitmitwarResume.pdf';
     link.download = 'AdityaChitmitwarResume.pdf';
     document.body.appendChild(link);
     link.click();
