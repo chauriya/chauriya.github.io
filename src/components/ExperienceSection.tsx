@@ -39,43 +39,52 @@ const ExperienceSection = () => {
   ];
 
   return (
-    <section className="py-16">
+    <section data-section="experience" className="py-16">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-4xl">
-          <h2 className="mb-12 text-center text-3xl font-bold text-primary">Professional Experience</h2>
+          <h2 className="mb-8 text-center text-3xl font-bold text-primary">Professional Experience</h2>
           
-          <div className="space-y-8">
+          <div className="space-y-4">
             {experiences.map((exp, index) => (
-              <Card key={index} className="p-6 shadow-soft animate-slide-in" style={{ animationDelay: `${index * 0.2}s` }}>
-                <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                  <div>
-                    <h3 className="text-xl font-bold text-primary">{exp.title}</h3>
-                    <p className="text-lg font-semibold text-foreground">{exp.company}</p>
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4" />
-                      {exp.period}
+              <div 
+                key={index}
+                style={{ 
+                  pageBreakInside: 'avoid',
+                  breakInside: 'avoid',
+                  pageBreakBefore: index === 0 ? 'auto' : 'avoid'
+                }}
+              >
+                <Card className="p-5 shadow-soft">
+                  <div className="mb-2.5 flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+                    <div>
+                      <h3 className="text-base font-bold text-primary">{exp.title}</h3>
+                      <p className="text-sm font-semibold text-foreground">{exp.company}</p>
                     </div>
-                    <div className="flex items-center gap-2 mt-1">
-                      <MapPin className="h-4 w-4" />
-                      {exp.location}
+                    <div className="text-xs text-muted-foreground whitespace-nowrap">
+                      <div className="flex items-center gap-1.5">
+                        <Calendar className="h-3.5 w-3.5" />
+                        {exp.period}
+                      </div>
+                      <div className="flex items-center gap-1.5 mt-1">
+                        <MapPin className="h-3.5 w-3.5" />
+                        {exp.location}
+                      </div>
                     </div>
                   </div>
-                </div>
-                
-                <p className="mb-4 text-muted-foreground leading-relaxed">
-                  {exp.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2">
-                  {exp.technologies.map((tech) => (
-                    <Badge key={tech} variant="outline" className="text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </Card>
+                  
+                  <p className="mb-2.5 text-muted-foreground leading-relaxed text-sm" style={{ maxWidth: '100%' }}>
+                    {exp.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-1">
+                    {exp.technologies.map((tech) => (
+                      <Badge key={tech} variant="outline" className="text-xs px-1.5 py-0.5">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                </Card>
+              </div>
             ))}
           </div>
         </div>

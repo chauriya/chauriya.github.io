@@ -6,6 +6,89 @@
 All colors MUST be HSL.
 */
 
+/* PDF Generation Styles */
+.generating-pdf {
+  /* Override any animations or transitions during PDF generation */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* PDF and Print Specific Styles */
+@media print {
+  /* Ensure content fits properly on PDF pages */
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Hide footer in PDF */
+  .generating-pdf footer {
+    display: none !important;
+  }
+
+  /* Better page breaks for sections */
+  section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 2rem;
+  }
+
+  /* Force page breaks before certain sections */
+  [data-section="experience"] {
+    page-break-before: always;
+  }
+
+  /* Handle experience cards properly */
+  [data-section="experience"] .card {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    break-after: auto !important;
+    margin-bottom: 1.5rem !important;
+    padding: 1.5rem !important;
+    max-height: 90vh; /* Prevent cards from being too tall */
+  }
+
+  /* Preserve image quality */
+  img {
+    image-rendering: high-quality;
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  /* Prevent awkward breaks within card content */
+  .card > * {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Ensure proper spacing between sections */
+  section + section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+  }
+
+  /* Better text rendering in PDF */
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Preserve background colors and images */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Ensure text remains readable */
+  p, h1, h2, h3, h4, h5, h6 {
+    orphans: 3;
+    widows: 3;
+  }
+}
+
 @layer base {
   :root {
     --background: 216 100% 98%;
@@ -117,4 +200,51 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@media print {
+  .pdf-avoid-break {
+    page-break-inside: avoid;
+  }
+
+  /* Prevent cards from splitting across pages */
+  .card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Ensure sections start on new pages if needed */
+  section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Add some spacing between sections */
+  section + section {
+    margin-top: 2rem;
+  }
+
+  /* Prevent image scaling issues */
+  img {
+    max-width: 100% !important;
+  }
+
+  /* Ensure text remains readable */
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* Improve card spacing in the experience section */
+[data-section="experience"] .card {
+  margin-bottom: 2rem;
+  page-break-inside: avoid;
+}
+
+/* Add proper spacing for better PDF rendering */
+#resume-content {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }

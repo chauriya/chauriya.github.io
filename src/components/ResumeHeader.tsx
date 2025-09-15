@@ -1,10 +1,16 @@
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { MapPin, Mail, Phone, ExternalLink, Linkedin, Download } from "lucide-react";
-import profileImage from "@/assets/profile-image.jpg";
-import { downloadResumeAsPDF } from "@/lib/pdf-utils";
+import profileImage from "@/assets/Profile-2.jpeg";
 
 const ResumeHeader = () => {
+  const handleDownload = () => {
+    // Create an anchor element and trigger the download
+    const link = document.createElement('a');
+    link.href = '/AdityaChitmitwarResume.pdf';
+    link.download = 'AdityaChitmitwarResume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   return (
     <section className="relative overflow-hidden bg-gradient-primary py-16 md:py-24">
       <div className="container mx-auto px-4">
@@ -52,12 +58,12 @@ const ResumeHeader = () => {
 
               <div className="flex flex-wrap justify-center gap-3 md:justify-start">
                 <button 
-                  onClick={downloadResumeAsPDF}
+                  onClick={handleDownload}
                   className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-sm font-medium transition-all hover:bg-white/20 hover:scale-105 border border-white/20"
                 >
                   <Download className="h-4 w-4" />
                   Download PDF
-                </button>
+                </button> 
                 <a 
                   href="https://achitmitwar.github.io" 
                   target="_blank" 
